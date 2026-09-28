@@ -1,5 +1,7 @@
 package com.swagger.coderestapi.entity;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,15 +9,33 @@ import java.util.Objects;
 
 import com.swagger.coderestapi.enums.StatusEnum;
 
-public class Order {
+public class Order implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2321125273648045849L;
+	
 	private Integer id;
 	private Integer idPartner;
-	private List<Item> ItemList;
-	private double totalValue;
+	private List<Item> itemList;
+	private BigDecimal totalValue;
 	private StatusEnum status;
 	private LocalDate createDate;
 	private LocalDateTime lastUpdateDate;
+	
+	
+	public Order(Integer id, Integer idPartner, List<Item> itemList, BigDecimal i, StatusEnum status,
+			LocalDate createDate, LocalDateTime lastUpdateDate) {
+		super();
+		this.id = id;
+		this.idPartner = idPartner;
+		this.itemList = itemList;
+		this.totalValue = i;
+		this.status = status;
+		this.createDate = createDate;
+		this.lastUpdateDate = lastUpdateDate;
+	}
 	
 	// Getters and Setters 
 	public Integer getId() {
@@ -31,15 +51,15 @@ public class Order {
 		this.idPartner = idPartner;
 	}
 	public List<Item> getItemList() {
-		return ItemList;
+		return itemList;
 	}
 	public void setItemList(List<Item> itemList) {
-		ItemList = itemList;
+		itemList = itemList;
 	}
-	public double getTotalValue() {
+	public BigDecimal getTotalValue() {
 		return totalValue;
 	}
-	public void setTotalValue(double totalValue) {
+	public void setTotalValue(BigDecimal totalValue) {
 		this.totalValue = totalValue;
 	}
 	public StatusEnum getStatus() {
@@ -60,12 +80,12 @@ public class Order {
 	public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(ItemList, createDate, id, idPartner, lastUpdateDate, status, Double.valueOf(totalValue));
+		return Objects.hash(createDate, id, idPartner, itemList, lastUpdateDate, status, totalValue);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,10 +95,14 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(ItemList, other.ItemList) && Objects.equals(createDate, other.createDate)
-				&& Objects.equals(id, other.id) && Objects.equals(idPartner, other.idPartner)
+		return Objects.equals(createDate, other.createDate) && Objects.equals(id, other.id)
+				&& Objects.equals(idPartner, other.idPartner) && Objects.equals(itemList, other.itemList)
 				&& Objects.equals(lastUpdateDate, other.lastUpdateDate) && status == other.status
-				&& Double.doubleToLongBits(totalValue) == Double.doubleToLongBits(other.totalValue);
+				&& Objects.equals(totalValue, other.totalValue);
 	}
+
+	
+	
+
 	
 }

@@ -1,9 +1,22 @@
 package com.swagger.coderestapi.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Item {
+public class Item implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7188167882711819468L;
+
+	public Item(String product, Integer quantity, BigDecimal unitPrice) {
+		super();
+		this.product = product;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+	}
 
 	private String product;
 	private Integer quantity;

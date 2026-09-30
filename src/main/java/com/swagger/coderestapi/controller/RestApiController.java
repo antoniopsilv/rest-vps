@@ -1,5 +1,7 @@
 package com.swagger.coderestapi.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,9 @@ public class RestApiController {
 	}
 	
 	@GetMapping("/consultapedidos")
-	public ResponseEntity<Order> retrieveOrder() {
+	public ResponseEntity<List<Order>> getOrders() {
 
-		Order order = restApiService.retrieveOrder();
+		List<Order> order = restApiService.getOrders();
 		return ResponseEntity.ok(order);
 
 	}

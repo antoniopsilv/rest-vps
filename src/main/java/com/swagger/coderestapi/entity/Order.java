@@ -25,13 +25,15 @@ public class Order implements Serializable {
 	private LocalDateTime lastUpdateDate;
 	
 	
-	public Order(Integer id, Integer idPartner, List<Item> itemList, BigDecimal i, StatusEnum status,
+	public Order() {
+	}
+
+	public Order(Integer id, Integer idPartner, List<Item> itemList, BigDecimal totalValue, StatusEnum status,
 			LocalDate createDate, LocalDateTime lastUpdateDate) {
-		super();
 		this.id = id;
 		this.idPartner = idPartner;
 		this.itemList = itemList;
-		this.totalValue = i;
+		this.totalValue = totalValue;
 		this.status = status;
 		this.createDate = createDate;
 		this.lastUpdateDate = lastUpdateDate;

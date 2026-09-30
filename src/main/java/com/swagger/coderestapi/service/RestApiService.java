@@ -28,6 +28,11 @@ public class RestApiService {
 	
 	public List<Order> getOrders() {
 		return restApiRepository.findAll();
+	}
+
+
+	public Order createOrder(Order order) {
+		return restApiRepository.save(order);
 	} 
 
 }

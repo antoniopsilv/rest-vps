@@ -14,6 +14,7 @@ import com.swagger.coderestapi.service.RestApiService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -28,15 +29,14 @@ public class RestApiController {
 	
 	@GetMapping("/consultapedidos")
 	public ResponseEntity<List<Order>> getOrders() {
-
 		List<Order> order = restApiService.getOrders();
 		return ResponseEntity.ok(order);
-
 	}
 	
-	@PostMapping("/cadastropedidos")
-	public ResponseEntity<String> insertOrder() {
-		return new ResponseEntity<>("Cadastro de Pedidos da Api", HttpStatus.CREATED);
+	@PostMapping("/cadastrapedidos")
+	public ResponseEntity<Order> createtOrder(@RequestBody Order order) {
+		Order  saveOrder = restApiService.createOrder(order);	
+		return new ResponseEntity<>(saveOrder, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/atualizarpedidos")

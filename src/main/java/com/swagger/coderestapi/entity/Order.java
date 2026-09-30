@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.swagger.coderestapi.enums.StatusEnum;
@@ -24,7 +25,7 @@ public class Order implements Serializable {
 	
     @Id
     private String mongoId;
-    
+    @Indexed(unique = true)
 	private Integer id;
 	private Integer idPartner;
 	private List<Item> itemList;

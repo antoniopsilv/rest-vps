@@ -9,10 +9,13 @@ public class Item implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7188167882711819468L;
+	private static final long serialVersionUID = 1037930124954800603L;
 
+	public Item() {
+	
+	}
+	
 	public Item(String product, Integer quantity, BigDecimal unitPrice) {
-		super();
 		this.product = product;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;

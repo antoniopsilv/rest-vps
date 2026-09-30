@@ -7,15 +7,24 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.swagger.coderestapi.enums.StatusEnum;
 
+@Document(collection = "orders")
 public class Order implements Serializable {
 
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2321125273648045849L;
+	private static final long serialVersionUID = 7125376740709495547L;
 	
+    @Id
+    private String mongoId;
+    
 	private Integer id;
 	private Integer idPartner;
 	private List<Item> itemList;
@@ -56,7 +65,7 @@ public class Order implements Serializable {
 		return itemList;
 	}
 	public void setItemList(List<Item> itemList) {
-		itemList = itemList;
+	    this.itemList = itemList;
 	}
 	public BigDecimal getTotalValue() {
 		return totalValue;

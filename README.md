@@ -9,6 +9,11 @@
 | coderestapi | coderestapi:latest | Up     | 8080:8080   |
 | mongodb     | mongo:latest       | Up     | 27017:27017 |
 *************************************************************************
+#### Teste - ConsultaPedido 
+#### url: http://localhost:8080/rest/consultapedidos
+```json
+curl --location 'http://localhost:8080/rest/consultapedidos'
+```
 #### Teste - CadastraPedido 
 #### url: http://localhost:8080/rest/cadastrapedidos
 #### request: 

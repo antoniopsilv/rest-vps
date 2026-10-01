@@ -2,6 +2,7 @@
 ## Teste - CadastraPedido 
 # url: http://localhost:8080/rest/cadastrapedidos
 # request: 
+```json
  {
     "id": 9006,
     "idPartner": 2001,
@@ -11,6 +12,8 @@
     "createDate": "2026-09-30",
     "lastUpdateDate": "2026-09-30T21:30:00"
 }
+```
+
 curl --location 'http://localhost:8080/rest/cadastrapedidos' \
 --header 'Content-Type: application/json' \
 --data '{

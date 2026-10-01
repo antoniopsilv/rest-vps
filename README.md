@@ -41,8 +41,6 @@ curl --location 'http://localhost:8080/rest/cadastrapedidos' \
     "lastUpdateDate": "2026-09-30T21:30:00"
 }'
 ```
-
-
 #### Teste - AtualizaPedido 
 #### url: http://localhost:8080/rest/atualizapedidos/9006
 #### request:
@@ -68,6 +66,27 @@ curl --location --request PUT 'http://localhost:8080/rest/atualizapedidos/9006?C
   "status": "APPROVED",
   "orderDate": "2026-09-30",
   "createdAt": "2026-09-30T23:00:00"
+}'
+```
+#### Teste - CancelaPedido 
+#### url: http://localhost:8080/rest/cancelapedidos/7777?Accept=application/json
+#### request:
+```json
+{
+  "id": 7777,
+  "customerId": 2001,
+  "amount": 300.00,
+  "status": "CANCELLED"
+}
+```
+```json
+curl --location --request DELETE 'http://localhost:8080/rest/cancelapedidos/7777?Accept=application%2Fjson' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 7777,
+  "customerId": 2001,
+  "amount": 300.00,
+  "status": "CANCELLED"
 }'
 ```
 #### Teste - AprovaPedido 

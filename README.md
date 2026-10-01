@@ -15,3 +15,17 @@ curl --location 'http://localhost:8080/rest/cadastrapedidos' \
 // Teste - Aprovar Pedido 
 url: http://localhost:8080/rest/aprovapedidos/9001
 curl --location --request PUT 'http://localhost:8080/rest/aprovapedidos/9001'
+
+
+**** Fluxo ****
+Controller
+    ↓
+RestApiService
+    ↓
+altera status do pedido
+    ↓
+NotificationService
+    ↓
+Message Broker (simulado)
+    ↓
+Log da mensagem

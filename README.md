@@ -41,12 +41,48 @@ curl --location 'http://localhost:8080/rest/cadastrapedidos' \
     "lastUpdateDate": "2026-09-30T21:30:00"
 }'
 ```
+
+
+#### Teste - AtualizaPedido 
+#### url: http://localhost:8080/rest/atualizapedidos/9006
+#### request:
+```json
+{
+  "id": 8888,
+  "customerId": 9999,
+  "items": [],
+  "amount": 200.00,
+  "status": "APPROVED",
+  "orderDate": "2026-09-30",
+  "createdAt": "2026-09-30T23:00:00"
+}
+```
+```json
+curl --location --request PUT 'http://localhost:8080/rest/atualizapedidos/9006?Content-Type=application%2Fjson&Accept=application%2Fjson' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 8888,
+  "customerId": 9999,
+  "items": [],
+  "amount": 200.00,
+  "status": "APPROVED",
+  "orderDate": "2026-09-30",
+  "createdAt": "2026-09-30T23:00:00"
+}'
+```
 #### Teste - AprovaPedido 
 #### url: http://localhost:8080/rest/cadastrapedidos](http://localhost:8080/rest/aprovapedidos/9001
 #### request: 
 ```json
-curl --location --request PUT 'http://localhost:8080/rest/aprovapedidos/9001'
+{
+  "id": 8888,
+  "customerId": 9999,
+  "items": [],
+  "amount": 200.00,
+  "status": "APPROVED",
+  "orderDate": "2026-09-30",
+  "createdAt": "2026-09-30T23:00:00"
+}'
 ```
-
 
 

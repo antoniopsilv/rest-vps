@@ -11,3 +11,7 @@ curl --location 'http://localhost:8080/rest/cadastrapedidos' \
     "createDate": "2026-09-30",
     "lastUpdateDate": "2026-09-30T21:30:00"
 }'
+
+// Teste - Aprovar Pedido 
+url: http://localhost:8080/rest/aprovapedidos/9001
+curl --location --request PUT 'http://localhost:8080/rest/aprovapedidos/9001'

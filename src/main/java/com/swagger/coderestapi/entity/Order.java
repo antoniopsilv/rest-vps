@@ -16,25 +16,29 @@ import com.swagger.coderestapi.enums.StatusEnum;
 @Document(collection = "orders")
 public class Order implements Serializable {
 
-
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7125376740709495547L;
+
+	@Id
+	private String mongoId;
 	
-    @Id
-    private String mongoId;
-    @Indexed(unique = true)
+	@Indexed(unique = true)
 	private Integer id;
+	
 	private Integer idPartner;
+	
 	private List<Item> itemList;
+	
 	private BigDecimal totalValue;
+	
 	private StatusEnum status;
+	
 	private LocalDate createDate;
+	
 	private LocalDateTime lastUpdateDate;
-	
-	
+
 	public Order() {
 	}
 
@@ -48,47 +52,60 @@ public class Order implements Serializable {
 		this.createDate = createDate;
 		this.lastUpdateDate = lastUpdateDate;
 	}
-	
-	// Getters and Setters 
+
+	// Getters and Setters
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getIdPartner() {
 		return idPartner;
 	}
+
 	public void setIdPartner(Integer idPartner) {
 		this.idPartner = idPartner;
 	}
+
 	public List<Item> getItemList() {
 		return itemList;
 	}
+
 	public void setItemList(List<Item> itemList) {
-	    this.itemList = itemList;
+		this.itemList = itemList;
 	}
+
 	public BigDecimal getTotalValue() {
 		return totalValue;
 	}
+
 	public void setTotalValue(BigDecimal totalValue) {
 		this.totalValue = totalValue;
 	}
+
 	public StatusEnum getStatus() {
 		return status;
 	}
+
 	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
+
 	public LocalDate getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
+
 	public LocalDateTime getLastUpdateDate() {
 		return lastUpdateDate;
 	}
+
 	public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
 	}
@@ -113,8 +130,4 @@ public class Order implements Serializable {
 				&& Objects.equals(totalValue, other.totalValue);
 	}
 
-	
-	
-
-	
 }

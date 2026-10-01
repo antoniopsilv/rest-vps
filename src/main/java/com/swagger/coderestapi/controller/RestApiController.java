@@ -59,4 +59,11 @@ public class RestApiController {
 		Order cancelOrder = restApiService.cancelOrder(id);
 		return ResponseEntity.ok(cancelOrder);
 	}
+	
+	@PutMapping("/aprovapedidos/{id}")
+	public ResponseEntity<Order> approveOrder(@PathVariable Integer id) {
+
+		Order approvedOrder = restApiService.approveOrder(id);
+		return ResponseEntity.ok(approvedOrder);
+	}
 }

@@ -23,7 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.swagger.coderestapi.entity.Order;
+import com.swagger.coderestapi.entity.Partner;
 import com.swagger.coderestapi.enums.StatusEnum;
+import com.swagger.coderestapi.repository.PartnerRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
@@ -34,15 +36,36 @@ class OrderIntegrationTest {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-
+    
+    @Autowired
+    private PartnerRepository partnerRepository;
+    
+    
+    
     @BeforeEach
     void cleanTestData() {
 
         mongoTemplate.remove(
             Query.query(
-                Criteria.where("id").in(1001, 8888, 7777)
+                Criteria.where("id").in(1001, 5555, 6666, 8888, 7777)
             ),
             Order.class
+        );
+
+        partnerRepository.deleteAll();
+
+        partnerRepository.save(
+            new Partner(
+                2001,
+                BigDecimal.valueOf(1000.00)
+            )
+        );
+
+        partnerRepository.save(
+            new Partner(
+                9999,
+                BigDecimal.valueOf(1000.00)
+            )
         );
     }
 
@@ -67,7 +90,7 @@ class OrderIntegrationTest {
                 2001,
                 new ArrayList<>(),
                 BigDecimal.valueOf(150.00),
-                StatusEnum.APPROVED,
+                StatusEnum.PENDING,
                 LocalDate.now(),
                 LocalDateTime.now()
         );
@@ -87,7 +110,7 @@ class OrderIntegrationTest {
         assertEquals(1001, createdOrder.getId());
         assertEquals(2001, createdOrder.getIdPartner());
         assertEquals(BigDecimal.valueOf(150.00), createdOrder.getTotalValue());
-        assertEquals(StatusEnum.APPROVED, createdOrder.getStatus());
+        assertEquals(StatusEnum.PENDING, createdOrder.getStatus());
     }
 
     @Test
@@ -175,5 +198,79 @@ class OrderIntegrationTest {
         assertNotNull(cancelledOrder);
         assertEquals(7777, cancelledOrder.getId());
         assertEquals(StatusEnum.CANCELLED, cancelledOrder.getStatus());
+    }
+    
+    @Test
+    void approveOrder() {
+
+        Order order = new Order(
+                5555,
+                2001,
+                new ArrayList<>(),
+                BigDecimal.valueOf(300.00),
+                StatusEnum.PENDING,
+                LocalDate.now(),
+                LocalDateTime.now()
+        );
+
+        ResponseEntity<Order> createResponse = restTemplate.postForEntity(
+                "/rest/cadastrapedidos",
+                order,
+                Order.class
+        );
+
+        assertEquals(HttpStatus.CREATED, createResponse.getStatusCode());
+
+        ResponseEntity<Order> approveResponse = restTemplate.exchange(
+                "/rest/aprovapedidos/5555",
+                HttpMethod.PUT,
+                null,
+                Order.class
+        );
+
+        assertNotNull(approveResponse);
+        assertEquals(HttpStatus.OK, approveResponse.getStatusCode());
+
+        Order approvedOrder = approveResponse.getBody();
+
+        assertNotNull(approvedOrder);
+        assertEquals(5555, approvedOrder.getId());
+        assertEquals(StatusEnum.APPROVED, approvedOrder.getStatus());
+
+        Partner partner = partnerRepository
+                .findPartnerById(2001)
+                .orElseThrow();
+
+        assertEquals(
+                BigDecimal.valueOf(700.00),
+                partner.getAvailableCredit()
+        );
+    }
+    
+    @Test
+    void shouldNotCreateOrderWhenCreditIsInsufficient() {
+
+        Order order = new Order(
+                6666,
+                2001,
+                new ArrayList<>(),
+                BigDecimal.valueOf(1500.00),
+                StatusEnum.PENDING,
+                LocalDate.now(),
+                LocalDateTime.now()
+        );
+
+        ResponseEntity<Order> response = restTemplate.postForEntity(
+                "/rest/cadastrapedidos",
+                order,
+                Order.class
+        );
+
+        assertNotNull(response);
+      
+        assertEquals(
+        	    HttpStatus.UNPROCESSABLE_CONTENT,
+        	    response.getStatusCode()
+        	);
     }
 }

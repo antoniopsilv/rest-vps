@@ -13,7 +13,7 @@
     "lastUpdateDate": "2026-09-30T21:30:00"
 }
 ```
-
+```json
 curl --location 'http://localhost:8080/rest/cadastrapedidos' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -25,6 +25,8 @@ curl --location 'http://localhost:8080/rest/cadastrapedidos' \
     "createDate": "2026-09-30",
     "lastUpdateDate": "2026-09-30T21:30:00"
 }'
+```
+
 
 // Teste - Aprovar Pedido 
 url: http://localhost:8080/rest/aprovapedidos/9001

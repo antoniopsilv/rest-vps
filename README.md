@@ -1,4 +1,14 @@
 ###### Como Executar o Projeto
+##### Inicializando o Container
+##### Dentro do diretório do projeto por exemplo: cd C:\projects\coderestapi
+####  Verifique se o arquivo docker-compose.yml está nessa pasta.
+####  Execute o comando: docker compose up --build -d
+####  Avalie se o container está ok com o comando: docker ps
+| CONTAINER   | IMAGE              | STATUS | PORTS       |
+| ----------- | ------------------ | ------ | ----------- |
+| coderestapi | coderestapi:latest | Up     | 8080:8080   |
+| mongodb     | mongo:latest       | Up     | 27017:27017 |
+*************************************************************************
 #### Teste - CadastraPedido 
 #### url: http://localhost:8080/rest/cadastrapedidos
 #### request: 

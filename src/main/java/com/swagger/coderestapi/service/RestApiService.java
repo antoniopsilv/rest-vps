@@ -15,13 +15,16 @@ public class RestApiService {
 	
     private final RestApiRepository restApiRepository;
     private final PartnerService partnerService;
-
+    private final NotificationService notificationService;
+    
     public RestApiService(
             RestApiRepository restApiRepository,
-            PartnerService partnerService) {
+            PartnerService partnerService,
+            NotificationService notificationService) {
 
         this.restApiRepository = restApiRepository;
         this.partnerService = partnerService;
+        this.notificationService = notificationService;
     }
 	
 	
@@ -61,6 +64,8 @@ public class RestApiService {
 				//.orElseThrow(() -> new RuntimeException("Order not found"));
 				.orElseThrow(() -> new OrderNotFoundException("Order not found: " + id));
 				existingOrder.setStatus(StatusEnum.CANCELLED);
+				
+				notificationService.notifyStatusChange(existingOrder);
 		
 		return restApiRepository.save(existingOrder);
 	}
@@ -86,6 +91,8 @@ public class RestApiService {
 
 		order.setStatus(StatusEnum.APPROVED);
 		order.setLastUpdateDate(LocalDateTime.now());
+		
+		notificationService.notifyStatusChange(order);
 
 		return restApiRepository.save(order);
 	}

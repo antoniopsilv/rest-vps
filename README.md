@@ -1,7 +1,7 @@
 ######### Como Executar o Projeto
-###### Teste - CadastraPedido 
-# url: http://localhost:8080/rest/cadastrapedidos
-# request: 
+#### Teste - CadastraPedido 
+#### url: http://localhost:8080/rest/cadastrapedidos
+#### request: 
 ```json
  {
     "id": 9006,
